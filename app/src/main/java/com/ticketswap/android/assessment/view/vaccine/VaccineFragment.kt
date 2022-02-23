@@ -1,4 +1,4 @@
-package com.ticketswap.android.assessment
+package com.ticketswap.android.assessment.view.vaccine
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -9,8 +9,8 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.ticketswap.android.assessment.R
+import com.ticketswap.android.assessment.data.model.Vaccine
 
 class VaccineFragment : Fragment() {
 

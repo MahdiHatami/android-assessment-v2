@@ -1,4 +1,8 @@
 package com.ticketswap.android.assessment
 
-class BAApplication {
+import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
+
+@HiltAndroidApp
+class BAApplication: Application(){
 }

@@ -1,4 +1,6 @@
-package com.ticketswap.android.assessment
+package com.ticketswap.android.assessment.data.local
+
+import com.ticketswap.android.assessment.data.model.Vaccine
 
 class VaccineDatabase {
     fun getVaccines(): List<Vaccine> {

@@ -1,4 +1,4 @@
-package com.ticketswap.android.assessment
+package com.ticketswap.android.assessment.view.vaccinesList
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -6,8 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.ticketswap.android.assessment.view.MainActivity
+import com.ticketswap.android.assessment.R
+import com.ticketswap.android.assessment.data.model.Vaccine
+import com.ticketswap.android.assessment.VaccinesAdapter
+import com.ticketswap.android.assessment.view.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 /**
  * using data-binding would be better choice fon handling the views for below reasons:
@@ -30,9 +39,12 @@ import androidx.recyclerview.widget.RecyclerView
  * (activity!! as MainActivity).goToVaccine(vaccine)
  */
 
-class VaccinesFragment : Fragment() {
+@AndroidEntryPoint
+class VaccinesFragment : BaseFragment() {
 
-    val viewModel = VaccinesViewModel()
+    private val viewModel by viewModels<VaccinesViewModel> { viewModelFactoryProvider }
+//    @Inject lateinit var adapter: VaccinesAdapter
+
     val adapter = VaccinesAdapter()
 
     override fun onCreateView(

@@ -1,4 +1,4 @@
-package com.ticketswap.android.assessment
+package com.ticketswap.android.assessment.data.repository
 
 import io.reactivex.Single
 

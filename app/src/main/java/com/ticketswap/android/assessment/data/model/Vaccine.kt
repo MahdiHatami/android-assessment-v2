@@ -1,4 +1,4 @@
-package com.ticketswap.android.assessment
+package com.ticketswap.android.assessment.data.model
 
 data class Vaccine(
     val id: Long,

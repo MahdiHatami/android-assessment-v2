@@ -1,9 +1,8 @@
-package com.ticketswap.android.assessment
+package com.ticketswap.android.assessment.view.vaccine
 
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.ticketswap.android.assessment.data.repository.BookAppointmentImpl
 import io.reactivex.android.schedulers.AndroidSchedulers
 
 /**
