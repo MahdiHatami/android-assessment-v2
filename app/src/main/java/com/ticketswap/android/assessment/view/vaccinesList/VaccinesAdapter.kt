@@ -1,12 +1,14 @@
-package com.ticketswap.android.assessment
+package com.ticketswap.android.assessment.view.vaccinesList
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.ticketswap.android.assessment.R
 import com.ticketswap.android.assessment.data.model.Vaccine
-import com.ticketswap.android.assessment.view.vaccinesList.VaccinesFragment
+import com.ticketswap.android.assessment.databinding.VaccineItemBinding
 
 /**
  * initializing vaccines list with empty list could prevent some unwanted crash from using !!
@@ -17,15 +19,22 @@ import com.ticketswap.android.assessment.view.vaccinesList.VaccinesFragment
  */
 class VaccinesAdapter : RecyclerView.Adapter<VaccineViewHolder>() {
 
-    var vaccines: List<Vaccine> = ArrayList()
+    private var vaccines: List<ViewVaccineItem> = ArrayList()
     var fragment: VaccinesFragment? = null
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun setVaccines(vaccines: List<ViewVaccineItem>) {
+        this.vaccines = vaccines
+        notifyDataSetChanged()
+    }
 
     override fun getItemCount(): Int {
         return vaccines.size
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VaccineViewHolder {
-        return VaccineViewHolder(parent.context, parent)
+        val binding = VaccineItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return VaccineViewHolder(binding)
     }
 
     override fun getItemId(position: Int): Long {
@@ -33,27 +42,22 @@ class VaccinesAdapter : RecyclerView.Adapter<VaccineViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: VaccineViewHolder, position: Int) {
-        vaccines[position].let { vaccine ->
-            holder.itemView.findViewById<TextView>(R.id.name).text = vaccine.name
-            vaccine.requiredShots?.let { shots ->
-                holder.itemView.findViewById<TextView>(R.id.requiredShots).text = "Shots required: $shots"
-            }
-            vaccine.daysBetweenShots?.let { shots ->
-                holder.itemView.findViewById<TextView>(R.id.daysBetweenShots).text = "Days between shots: $shots"
-            }
-
-            holder.itemView.setOnClickListener {
-                fragment!!.onVaccineSelected(vaccine)
-            }
-        }
+        val vaccine = vaccines[position]
+        holder.setVaccine(vaccine)
     }
 }
 
 /**
  * using binding for vaccine_item as i said in [VaccinesFragment] before about data-binding
  */
-class VaccineViewHolder(val context: Context, val parent: ViewGroup): RecyclerView.ViewHolder(
-    LayoutInflater.from(context).inflate(R.layout.vaccine_item, parent, false)
-)
+class VaccineViewHolder internal constructor(internal val binding: VaccineItemBinding) :
+    RecyclerView.ViewHolder(binding.root) {
+
+    fun setVaccine(vaccine: ViewVaccineItem) {
+        binding.vaccine = vaccine
+    }
+}
+
+
 
 

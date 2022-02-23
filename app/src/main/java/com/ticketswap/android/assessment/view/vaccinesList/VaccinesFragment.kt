@@ -1,22 +1,17 @@
 package com.ticketswap.android.assessment.view.vaccinesList
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.ticketswap.android.assessment.view.MainActivity
-import com.ticketswap.android.assessment.R
-import com.ticketswap.android.assessment.data.model.Vaccine
-import com.ticketswap.android.assessment.VaccinesAdapter
+import com.ticketswap.android.assessment.databinding.FragmentVaccinesBinding
 import com.ticketswap.android.assessment.view.BaseFragment
+import com.ticketswap.android.assessment.view.util.launchWhileResumed
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
+import kotlinx.coroutines.flow.collectLatest
 
 /**
  * using data-binding would be better choice fon handling the views for below reasons:
@@ -42,41 +37,45 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class VaccinesFragment : BaseFragment() {
 
+    private lateinit var binding: FragmentVaccinesBinding
     private val viewModel by viewModels<VaccinesViewModel> { viewModelFactoryProvider }
-//    @Inject lateinit var adapter: VaccinesAdapter
 
     val adapter = VaccinesAdapter()
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
-        val view = inflater.inflate(R.layout.fragment_vaccines, container, false)
-
-        view.findViewById<RecyclerView>(R.id.vaccines).layoutManager = LinearLayoutManager(requireContext())
-        view.findViewById<RecyclerView>(R.id.vaccines).adapter = adapter
-        adapter.fragment = this
-
-        return view
+        binding = FragmentVaccinesBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewModel = viewModel
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.vaccinesList.observe(viewLifecycleOwner, {
-            adapter.vaccines = it
-            adapter.notifyDataSetChanged()
-        })
+        binding.vaccines.layoutManager = LinearLayoutManager(requireContext())
+        binding.vaccines.adapter = adapter
+
+        lifecycle.launchWhileResumed {
+            viewModel.selectedVaccine.collectLatest { vaccineId ->
+                onVaccineRowClick(vaccineId)
+            }
+        }
+
+        lifecycle.launchWhileResumed {
+            viewModel.onError.collectLatest {
+                if (it) showErrorMessage()
+            }
+        }
     }
 
-    @SuppressLint("UseRequireInsteadOfGet")
-    fun onVaccineSelected(vaccine: Vaccine) {
-        /**
-         * what if our activity returns null then our app is going to crash
-         * one of the best ways to communicate fragment with activity or another fragment by using
-         * listeners or sharing viewModels between two classes
-         */
-        (activity!! as MainActivity).goToVaccine(vaccine)
+    private fun onVaccineRowClick(vaccineId: Int) {
+        val action = VaccinesFragmentDirections.actionVaccinesFragmentToVaccineFragment()
+        view?.findNavController()?.navigate(action)
     }
+
+
 }

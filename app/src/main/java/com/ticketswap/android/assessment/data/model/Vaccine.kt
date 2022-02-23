@@ -5,4 +5,5 @@ data class Vaccine(
     val name: String,
     val description: String,
     val requiredShots: Int?,
-    val daysBetweenShots: Int?)
+    val daysBetweenShots: Int?,
+)

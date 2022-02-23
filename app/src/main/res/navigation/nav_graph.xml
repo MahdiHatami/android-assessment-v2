@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/vaccinesFragment">
+
+    <fragment
+        android:id="@+id/vaccinesFragment"
+        android:name="com.ticketswap.android.assessment.view.vaccinesList.VaccinesFragment"
+        android:label="VaccinesFragment"
+        tools:layout="@layout/fragment_vaccines">
+        <action
+            android:id="@+id/action_vaccinesFragment_to_vaccineFragment"
+            app:destination="@id/vaccineFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/vaccineFragment"
+        android:name="com.ticketswap.android.assessment.view.vaccine.VaccineFragment"
+        android:label="VaccineFragment"
+        tools:layout="@layout/fragment_vaccine"
+        />
+</navigation>
