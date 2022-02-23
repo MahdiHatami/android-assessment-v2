@@ -7,6 +7,13 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
+/**
+ * initializing vaccines list with empty list could prevent some unwanted crash from using !!
+ */
+
+/**
+ * "Shots required: $shots" instead better to use string resources
+ */
 class VaccinesAdapter : RecyclerView.Adapter<VaccineViewHolder>() {
 
     var vaccines: List<Vaccine>? = null
@@ -41,6 +48,9 @@ class VaccinesAdapter : RecyclerView.Adapter<VaccineViewHolder>() {
     }
 }
 
+/**
+ * using binding for vaccine_item as i said in [VaccinesFragment] before about data-binding
+ */
 class VaccineViewHolder(val context: Context, val parent: ViewGroup): RecyclerView.ViewHolder(
     LayoutInflater.from(context).inflate(R.layout.vaccine_item, parent, false)
 )

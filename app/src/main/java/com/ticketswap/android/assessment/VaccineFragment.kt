@@ -24,6 +24,10 @@ class VaccineFragment : Fragment() {
     ): View {
         val view = inflater.inflate(R.layout.fragment_vaccine, container, false)
 
+        /**
+         * The whole point of using let with nullable variable is to eliminate the null pointer exception
+         * when using arguments!!.let the app is going to crash if arguments was null
+         */
         arguments!!.let {
             val vaccine = Vaccine(
                 id = it.getLong("id"),
