@@ -76,7 +76,6 @@ dependencies {
     testImplementation("androidx.arch.core:core-testing:2.1.0")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
-    implementation("io.reactivex.rxjava2:rxandroid:2.1.1")
 
     // Dependency Injection
     implementation("com.google.dagger:hilt-android:2.38.1")

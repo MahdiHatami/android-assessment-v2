@@ -1,16 +1,14 @@
 package com.ticketswap.android.assessment.view.vaccine
 
-import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.ticketswap.android.assessment.data.repository.BookAppointment
 import com.ticketswap.android.assessment.domain.model.QueryResult
 import com.ticketswap.android.assessment.view.mapper.toViewVaccineDetailItem
-import com.ticketswap.android.assessment.view.mapper.toViewVaccineItem
 import com.ticketswap.android.assessment.view.util.LoadingState
-import com.ticketswap.android.assessment.view.vaccinesList.ViewVaccineItem
-import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
@@ -35,35 +33,29 @@ class VaccineViewModel @Inject constructor(
     private val _selectedVaccine: MutableStateFlow<ViewVaccineDetailItem?> = MutableStateFlow(null)
     val selectedVaccine: StateFlow<ViewVaccineDetailItem?> = _selectedVaccine
 
-    @SuppressLint("CheckResult")
     fun bookAppointment() {
         _loadingState.value = LoadingState.Loading
-        when (val result = repository.bookAppointment()) {
-            is QueryResult.Successful -> {
-                result.data
-                    .subscribeOn(AndroidSchedulers.mainThread())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe({
-                        _confirmAppointment.value = true
-                    }, {})
-            }
-            QueryResult.Error -> _onError.value = true
-            else -> {
-                _onError.value = true
+        viewModelScope.launch {
+            when (val result = repository.bookAppointment()) {
+                is QueryResult.Successful -> {
+                    _confirmAppointment.value = result.data
+                }
+                QueryResult.Error -> _onError.value = true
             }
         }
+        _loadingState.value = LoadingState.None
     }
 
     fun loadVaccineDetail(vaccineId: Long) {
         _loadingState.value = LoadingState.Loading
-        when (val result = repository.getVaccineById(vaccineId)) {
-            is QueryResult.Successful -> {
-                _selectedVaccine.value = result.data.toViewVaccineDetailItem()
-            }
-            QueryResult.Error -> _onError.value = true
-            else -> {
-                _onError.value = true
+        viewModelScope.launch {
+            when (val result = repository.getVaccineById(vaccineId)) {
+                is QueryResult.Successful -> {
+                    _selectedVaccine.value = result.data.toViewVaccineDetailItem()
+                }
+                QueryResult.Error -> _onError.value = true
             }
         }
+        _loadingState.value = LoadingState.None
     }
 }

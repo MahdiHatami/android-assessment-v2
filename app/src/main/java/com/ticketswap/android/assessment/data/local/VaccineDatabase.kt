@@ -4,6 +4,7 @@ import com.ticketswap.android.assessment.data.model.Vaccine
 import com.ticketswap.android.assessment.domain.model.PageQueryResult
 import com.ticketswap.android.assessment.domain.model.QueryResult
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 
 private val list = listOf(
@@ -74,10 +75,10 @@ private val list = listOf(
 )
 
 class VaccineDatabase {
-    fun getVaccines(): PageQueryResult<List<Vaccine>> {
-        // Simulating a delay on a real database query
-        Thread.sleep(1000)
-        return PageQueryResult.Successful(list)
+
+    suspend fun getVaccines(): PageQueryResult<List<Vaccine>> = withContext(Dispatchers.IO) {
+        delay(1000L)
+        PageQueryResult.Successful(list)
     }
 
     fun getVaccine(vaccineId: Long): QueryResult<Vaccine> {

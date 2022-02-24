@@ -23,7 +23,7 @@ private fun RecyclerView.getOrCreateVaccineListAdapter(): VaccinesAdapter {
     }
 }
 
-@BindingAdapter("isLoadingMore")
-fun ProgressBar.setIsLoadingMore(loadingState: LoadingState?) {
-    visibility = if (loadingState == LoadingState.LoadingMore) View.VISIBLE else View.GONE
+@BindingAdapter("isLoading")
+fun ProgressBar.setIsLoading(loadingState: LoadingState?) {
+    visibility = if (loadingState == LoadingState.Loading) View.VISIBLE else View.GONE
 }

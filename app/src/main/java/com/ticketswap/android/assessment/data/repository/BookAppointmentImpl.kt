@@ -3,8 +3,9 @@ package com.ticketswap.android.assessment.data.repository
 import com.ticketswap.android.assessment.data.local.VaccineDatabase
 import com.ticketswap.android.assessment.data.model.Vaccine
 import com.ticketswap.android.assessment.domain.model.QueryResult
-import io.reactivex.Single
-import java.util.concurrent.TimeUnit
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import kotlin.random.Random
 
@@ -14,17 +15,14 @@ import kotlin.random.Random
 class BookAppointmentImpl @Inject constructor(
     private val database: VaccineDatabase
 ) : BookAppointment {
-    override fun bookAppointment(): QueryResult.Successful<Single<Boolean>> {
-        return QueryResult.Successful(
-            Single
-                // Simulate success and failure randomly
-                .just(Random.nextBoolean())
-                // Simulate some network delay
-                .delay(Random.nextLong() % 30L, TimeUnit.SECONDS)
-        )
-    }
+    override suspend fun bookAppointment(): QueryResult.Successful<Boolean> =
+        withContext(Dispatchers.IO) {
+            val random = Random.nextBoolean().also { delay(Random.nextLong() % 30L) }
+            QueryResult.Successful(random)
+        }
 
-    override fun getVaccineById(id: Long): QueryResult<Vaccine> {
-        return database.getVaccine(id)
-    }
+    override suspend fun getVaccineById(id: Long): QueryResult<Vaccine> =
+        withContext(Dispatchers.IO) {
+            database.getVaccine(id)
+        }
 }
