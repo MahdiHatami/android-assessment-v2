@@ -1,4 +1,6 @@
-# TicketSwap Android Assessment
+# TicketSwap Android Assessment (https://github.com/TicketSwap/android-assessment-v2)
+
+### You can found my solution to this assessment
 
 As you know our business is centered on events like concerts and festivals. We love bringing people together to enjoy the best artists and events.
 As you probably know by now, since the Zombie Virus breakout we cannot do this anymore, people have to stay far away from each other so this biblical nightmare can end soon.
