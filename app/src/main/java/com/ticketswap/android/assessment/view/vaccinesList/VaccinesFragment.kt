@@ -76,6 +76,4 @@ class VaccinesFragment : BaseFragment() {
         val action = VaccinesFragmentDirections.actionVaccinesFragmentToVaccineFragment()
         view?.findNavController()?.navigate(action)
     }
-
-
 }

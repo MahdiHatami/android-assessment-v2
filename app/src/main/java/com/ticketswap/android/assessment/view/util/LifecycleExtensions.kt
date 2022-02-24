@@ -7,7 +7,6 @@ import androidx.lifecycle.coroutineScope
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 
-
 fun Lifecycle.launchWhileResumed(block: suspend CoroutineScope.() -> Unit): Job {
     val job = coroutineScope.launchWhenResumed(block)
     addObserver(

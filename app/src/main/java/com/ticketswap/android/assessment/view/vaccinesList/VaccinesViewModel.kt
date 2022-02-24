@@ -3,8 +3,8 @@ package com.ticketswap.android.assessment.view.vaccinesList
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.ticketswap.android.assessment.data.model.Vaccine
 import com.ticketswap.android.assessment.data.local.VaccineDatabase
+import com.ticketswap.android.assessment.data.model.Vaccine
 import com.ticketswap.android.assessment.domain.model.PageQueryResult
 import com.ticketswap.android.assessment.view.mapper.toViewVaccineItem
 import com.ticketswap.android.assessment.view.util.LoadingState

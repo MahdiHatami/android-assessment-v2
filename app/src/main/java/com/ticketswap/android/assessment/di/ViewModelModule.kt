@@ -10,7 +10,6 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dagger.multibindings.IntoMap
 
-
 @InstallIn(SingletonComponent::class)
 @Module
 abstract class ViewModelModule {
@@ -22,5 +21,4 @@ abstract class ViewModelModule {
     @Binds
     @ViewModelKey(VaccinesViewModel::class)
     abstract fun bindVaccinesViewModel(viewModel: VaccinesViewModel): ViewModel
-
 }

@@ -15,7 +15,7 @@ class VaccineDatabase {
                     requiredShots = 2,
                     daysBetweenShots = 21,
                     description = "CDC Monitoring Reports of Myocarditis and Pericarditis\n" +
-                            "CDC has received increased reports of myocarditis and pericarditis in adolescents and young adults after COVID-19 vaccination. The known and potential benefits of COVID-19 vaccination outweigh the known and potential risks, including the possible risk of myocarditis or pericarditis. We continue to recommend COVID-19 vaccination for anyone 12 years of age and older."
+                        "CDC has received increased reports of myocarditis and pericarditis in adolescents and young adults after COVID-19 vaccination. The known and potential benefits of COVID-19 vaccination outweigh the known and potential risks, including the possible risk of myocarditis or pericarditis. We continue to recommend COVID-19 vaccination for anyone 12 years of age and older."
                 ),
                 Vaccine(
                     id = 2L,
@@ -23,7 +23,7 @@ class VaccineDatabase {
                     requiredShots = 2,
                     daysBetweenShots = 34,
                     description = "CDC Monitoring Reports of Myocarditis and Pericarditis\n" +
-                            "CDC has received increased reports of myocarditis and pericarditis in adolescents and young adults after COVID-19 vaccination. The known and potential benefits of COVID-19 vaccination outweigh the known and potential risks, including the possible risk of myocarditis or pericarditis. We continue to recommend COVID-19 vaccination for anyone 12 years of age and older."
+                        "CDC has received increased reports of myocarditis and pericarditis in adolescents and young adults after COVID-19 vaccination. The known and potential benefits of COVID-19 vaccination outweigh the known and potential risks, including the possible risk of myocarditis or pericarditis. We continue to recommend COVID-19 vaccination for anyone 12 years of age and older."
                 ),
                 Vaccine(
                     id = 3L,
@@ -31,7 +31,7 @@ class VaccineDatabase {
                     requiredShots = 2,
                     daysBetweenShots = 48,
                     description = "CDC Monitoring Reports of Myocarditis and Pericarditis\n" +
-                            "CDC has received increased reports of myocarditis and pericarditis in adolescents and young adults after COVID-19 vaccination. The known and potential benefits of COVID-19 vaccination outweigh the known and potential risks, including the possible risk of myocarditis or pericarditis. We continue to recommend COVID-19 vaccination for anyone 12 years of age and older."
+                        "CDC has received increased reports of myocarditis and pericarditis in adolescents and young adults after COVID-19 vaccination. The known and potential benefits of COVID-19 vaccination outweigh the known and potential risks, including the possible risk of myocarditis or pericarditis. We continue to recommend COVID-19 vaccination for anyone 12 years of age and older."
                 ),
                 Vaccine(
                     id = 4L,
@@ -39,7 +39,7 @@ class VaccineDatabase {
                     requiredShots = 6,
                     daysBetweenShots = 12,
                     description = "CDC Monitoring Reports of Myocarditis and Pericarditis\n" +
-                            "CDC has received increased reports of myocarditis and pericarditis in adolescents and young adults after COVID-19 vaccination. The known and potential benefits of COVID-19 vaccination outweigh the known and potential risks, including the possible risk of myocarditis or pericarditis. We continue to recommend COVID-19 vaccination for anyone 12 years of age and older."
+                        "CDC has received increased reports of myocarditis and pericarditis in adolescents and young adults after COVID-19 vaccination. The known and potential benefits of COVID-19 vaccination outweigh the known and potential risks, including the possible risk of myocarditis or pericarditis. We continue to recommend COVID-19 vaccination for anyone 12 years of age and older."
                 ),
                 Vaccine(
                     id = 5L,
@@ -47,7 +47,7 @@ class VaccineDatabase {
                     requiredShots = 2,
                     daysBetweenShots = 16,
                     description = "CDC Monitoring Reports of Myocarditis and Pericarditis\n" +
-                            "CDC has received increased reports of myocarditis and pericarditis in adolescents and young adults after COVID-19 vaccination. The known and potential benefits of COVID-19 vaccination outweigh the known and potential risks, including the possible risk of myocarditis or pericarditis. We continue to recommend COVID-19 vaccination for anyone 12 years of age and older."
+                        "CDC has received increased reports of myocarditis and pericarditis in adolescents and young adults after COVID-19 vaccination. The known and potential benefits of COVID-19 vaccination outweigh the known and potential risks, including the possible risk of myocarditis or pericarditis. We continue to recommend COVID-19 vaccination for anyone 12 years of age and older."
                 ),
                 Vaccine(
                     id = 6L,
@@ -55,7 +55,7 @@ class VaccineDatabase {
                     requiredShots = null,
                     daysBetweenShots = 45,
                     description = "CDC Monitoring Reports of Myocarditis and Pericarditis\n" +
-                            "CDC has received increased reports of myocarditis and pericarditis in adolescents and young adults after COVID-19 vaccination. The known and potential benefits of COVID-19 vaccination outweigh the known and potential risks, including the possible risk of myocarditis or pericarditis. We continue to recommend COVID-19 vaccination for anyone 12 years of age and older."
+                        "CDC has received increased reports of myocarditis and pericarditis in adolescents and young adults after COVID-19 vaccination. The known and potential benefits of COVID-19 vaccination outweigh the known and potential risks, including the possible risk of myocarditis or pericarditis. We continue to recommend COVID-19 vaccination for anyone 12 years of age and older."
                 ),
                 Vaccine(
                     id = 7L,
@@ -63,7 +63,7 @@ class VaccineDatabase {
                     requiredShots = 7,
                     daysBetweenShots = null,
                     description = "CDC Monitoring Reports of Myocarditis and Pericarditis\n" +
-                            "CDC has received increased reports of myocarditis and pericarditis in adolescents and young adults after COVID-19 vaccination. The known and potential benefits of COVID-19 vaccination outweigh the known and potential risks, including the possible risk of myocarditis or pericarditis. We continue to recommend COVID-19 vaccination for anyone 12 years of age and older."
+                        "CDC has received increased reports of myocarditis and pericarditis in adolescents and young adults after COVID-19 vaccination. The known and potential benefits of COVID-19 vaccination outweigh the known and potential risks, including the possible risk of myocarditis or pericarditis. We continue to recommend COVID-19 vaccination for anyone 12 years of age and older."
                 ),
                 Vaccine(
                     id = 8L,
@@ -71,7 +71,7 @@ class VaccineDatabase {
                     requiredShots = 2,
                     daysBetweenShots = 12,
                     description = "CDC Monitoring Reports of Myocarditis and Pericarditis\n" +
-                            "CDC has received increased reports of myocarditis and pericarditis in adolescents and young adults after COVID-19 vaccination. The known and potential benefits of COVID-19 vaccination outweigh the known and potential risks, including the possible risk of myocarditis or pericarditis. We continue to recommend COVID-19 vaccination for anyone 12 years of age and older."
+                        "CDC has received increased reports of myocarditis and pericarditis in adolescents and young adults after COVID-19 vaccination. The known and potential benefits of COVID-19 vaccination outweigh the known and potential risks, including the possible risk of myocarditis or pericarditis. We continue to recommend COVID-19 vaccination for anyone 12 years of age and older."
                 )
             )
         )

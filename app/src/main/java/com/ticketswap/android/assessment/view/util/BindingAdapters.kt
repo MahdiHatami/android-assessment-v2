@@ -4,7 +4,6 @@ import android.view.View
 import android.widget.ProgressBar
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.ticketswap.android.assessment.data.model.Vaccine
 import com.ticketswap.android.assessment.view.vaccinesList.VaccinesAdapter
 import com.ticketswap.android.assessment.view.vaccinesList.ViewVaccineItem
 
@@ -14,7 +13,7 @@ fun RecyclerView.setEpisodes(itemViewModels: List<ViewVaccineItem>?) {
     adapter.setVaccines(itemViewModels ?: emptyList())
 }
 
-private fun RecyclerView.getOrCreateVaccineListAdapter(): VaccinesAdapter{
+private fun RecyclerView.getOrCreateVaccineListAdapter(): VaccinesAdapter {
     return if (adapter != null && adapter is VaccinesAdapter) {
         adapter as VaccinesAdapter
     } else {

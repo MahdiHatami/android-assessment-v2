@@ -13,5 +13,4 @@ abstract class BaseFragment : Fragment() {
     fun showErrorMessage() {
         Toast.makeText(context, R.string.error_message, Toast.LENGTH_LONG).show()
     }
-
 }

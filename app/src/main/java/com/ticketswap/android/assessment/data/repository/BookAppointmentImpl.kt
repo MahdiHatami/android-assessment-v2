@@ -10,9 +10,9 @@ import kotlin.random.Random
 class BookAppointmentImpl : BookAppointment {
     override fun bookAppointment(): Single<Boolean> {
         return Single
-                // Simulate success and failure randomly
+            // Simulate success and failure randomly
             .just(Random.nextBoolean())
-                // Simulate some network delay
+            // Simulate some network delay
             .delay(Random.nextLong() % 30L, TimeUnit.SECONDS)
     }
 }
