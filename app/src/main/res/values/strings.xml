@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">TicketswapAssessment</string>
+    <string name="error_message">Something went wrong!</string>
+    <string name="shots_required">Shots required: %s</string>
+    <string name="days_between_shots">Days between shots: %d</string>
+    <string name="got_appointment">You have an appointment!</string>
 </resources>
