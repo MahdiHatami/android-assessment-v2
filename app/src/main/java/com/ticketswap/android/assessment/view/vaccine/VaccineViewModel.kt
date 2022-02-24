@@ -42,8 +42,8 @@ class VaccineViewModel @Inject constructor(
                 }
                 QueryResult.Error -> _onError.value = true
             }
+            _loadingState.value = LoadingState.None
         }
-        _loadingState.value = LoadingState.None
     }
 
     fun loadVaccineDetail(vaccineId: Long) {

@@ -1,5 +1,6 @@
 package com.ticketswap.android.assessment.view.vaccinesList
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -42,6 +43,7 @@ class VaccinesViewModel @Inject constructor(
 
     private fun loadVaccines() {
         _loadingState.value = LoadingState.Loading
+        Log.d("VVM", "start loading: ")
         viewModelScope.launch {
             when (val result = database.getVaccines()) {
                 is PageQueryResult.Successful -> {
@@ -49,8 +51,9 @@ class VaccinesViewModel @Inject constructor(
                 }
                 PageQueryResult.Error -> _onError.value = true
             }
+            Log.d("VVM", "done load: ")
+            _loadingState.value = LoadingState.None
         }
-        _loadingState.value = LoadingState.None
     }
 
     private fun List<Vaccine>.toViewVaccineItems(): List<ViewVaccineItem> = map { vaccine ->
