@@ -43,7 +43,6 @@ class VaccinesViewModel @Inject constructor(
 
     private fun loadVaccines() {
         _loadingState.value = LoadingState.Loading
-        Log.d("VVM", "start loading: ")
         viewModelScope.launch {
             when (val result = database.getVaccines()) {
                 is PageQueryResult.Successful -> {
@@ -51,7 +50,6 @@ class VaccinesViewModel @Inject constructor(
                 }
                 PageQueryResult.Error -> _onError.value = true
             }
-            Log.d("VVM", "done load: ")
             _loadingState.value = LoadingState.None
         }
     }
