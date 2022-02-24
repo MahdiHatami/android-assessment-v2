@@ -1,56 +1,57 @@
 package com.ticketswap.android.assessment.view.vaccine
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import com.ticketswap.android.assessment.R
-import com.ticketswap.android.assessment.data.model.Vaccine
+import com.ticketswap.android.assessment.databinding.FragmentVaccineBinding
+import com.ticketswap.android.assessment.view.BaseFragment
+import com.ticketswap.android.assessment.view.util.launchWhileResumed
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 
-class VaccineFragment : Fragment() {
+@AndroidEntryPoint
+class VaccineFragment : BaseFragment() {
 
-    val viewModel = VaccineViewModel()
+    private lateinit var binding: FragmentVaccineBinding
+    private val viewModel by viewModels<VaccineViewModel> { viewModelFactoryProvider }
+    private val args: VaccineFragmentArgs by navArgs()
 
-    @SuppressLint("UseRequireInsteadOfGet")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view = inflater.inflate(R.layout.fragment_vaccine, container, false)
+        binding = FragmentVaccineBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewModel = viewModel
 
-        /**
-         * The whole point of using let with nullable variable is to eliminate the null pointer exception
-         * when using arguments!!.let the app is going to crash if arguments was null
-         */
-        arguments!!.let {
-            val vaccine = Vaccine(
-                id = it.getLong("id"),
-                name = it.getString("name", ""),
-                description = it.getString("description", ""),
-                requiredShots = it.getInt("requiredShots"),
-                daysBetweenShots = it.getInt("daysBetweenShots")
-            )
-
-            view.findViewById<TextView>(R.id.name).text = vaccine.name
-            view.findViewById<TextView>(R.id.requiredShots).text = "Shots required: ${vaccine.requiredShots}"
-            view.findViewById<TextView>(R.id.daysBetweenShots).text = "Days between shots: ${vaccine.daysBetweenShots}"
-            view.findViewById<TextView>(R.id.description).text = vaccine.description
-        }
-
-        view.findViewById<Button>(R.id.bookAppointment).setOnClickListener {
-            viewModel.bookAppointment(this)
-        }
-
-        return view
+        return binding.root
     }
 
-    fun confirmAppointment() {
-        Toast.makeText(context, "You have an appointment!", Toast.LENGTH_LONG).show()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewModel.loadVaccineDetail(args.vaccineId)
+
+        lifecycle.launchWhileResumed {
+            viewModel.confirmAppointment.collectLatest {
+                if (it) {
+                    Toast.makeText(
+                        context, getString(R.string.got_appointment), Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+        }
+
+        lifecycle.launchWhileResumed {
+            viewModel.onError.collectLatest {
+                if (it) showErrorMessage()
+            }
+        }
     }
 }

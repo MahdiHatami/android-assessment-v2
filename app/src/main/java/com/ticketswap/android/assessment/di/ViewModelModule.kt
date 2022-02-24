@@ -3,6 +3,7 @@ package com.ticketswap.android.assessment.di
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.ticketswap.android.assessment.ViewModelFactory
+import com.ticketswap.android.assessment.view.vaccine.VaccineViewModel
 import com.ticketswap.android.assessment.view.vaccinesList.VaccinesViewModel
 import dagger.Binds
 import dagger.Module
@@ -21,4 +22,9 @@ abstract class ViewModelModule {
     @Binds
     @ViewModelKey(VaccinesViewModel::class)
     abstract fun bindVaccinesViewModel(viewModel: VaccinesViewModel): ViewModel
+
+    @IntoMap
+    @Binds
+    @ViewModelKey(VaccineViewModel::class)
+    abstract fun bindVaccineViewModel(viewModel: VaccineViewModel): ViewModel
 }

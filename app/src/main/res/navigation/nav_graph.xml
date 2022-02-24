@@ -18,6 +18,10 @@
         android:id="@+id/vaccineFragment"
         android:name="com.ticketswap.android.assessment.view.vaccine.VaccineFragment"
         android:label="VaccineFragment"
-        tools:layout="@layout/fragment_vaccine"
-        />
+        tools:layout="@layout/fragment_vaccine">
+
+        <argument
+            android:name="vaccineId"
+            app:argType="long" />
+    </fragment>
 </navigation>

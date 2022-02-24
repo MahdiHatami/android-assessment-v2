@@ -32,8 +32,8 @@ class VaccinesViewModel @Inject constructor(
     private val _vaccinesList = MutableLiveData<List<ViewVaccineItem>>()
     val vaccinesList: LiveData<List<ViewVaccineItem>> = _vaccinesList
 
-    private val _selectedVaccine: Channel<Int> = Channel()
-    val selectedVaccine: Flow<Int> = _selectedVaccine.receiveAsFlow()
+    private val _selectedVaccine: Channel<Long> = Channel()
+    val selectedVaccine: Flow<Long> = _selectedVaccine.receiveAsFlow()
 
     init {
         loadVaccines()
@@ -55,7 +55,7 @@ class VaccinesViewModel @Inject constructor(
 
     private fun List<Vaccine>.toViewVaccineItems(): List<ViewVaccineItem> = map { vaccine ->
         vaccine.toViewVaccineItem {
-            _selectedVaccine.sendBlocking(vaccine.id.toInt())
+            _selectedVaccine.trySend(vaccine.id)
         }
     }
 }

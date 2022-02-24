@@ -40,7 +40,7 @@ class VaccinesFragment : BaseFragment() {
     private lateinit var binding: FragmentVaccinesBinding
     private val viewModel by viewModels<VaccinesViewModel> { viewModelFactoryProvider }
 
-    val adapter = VaccinesAdapter()
+    private val adapter = VaccinesAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -72,8 +72,8 @@ class VaccinesFragment : BaseFragment() {
         }
     }
 
-    private fun onVaccineRowClick(vaccineId: Int) {
-        val action = VaccinesFragmentDirections.actionVaccinesFragmentToVaccineFragment()
+    private fun onVaccineRowClick(vaccineId: Long) {
+        val action = VaccinesFragmentDirections.actionVaccinesFragmentToVaccineFragment(vaccineId)
         view?.findNavController()?.navigate(action)
     }
 }
