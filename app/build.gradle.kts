@@ -4,16 +4,17 @@ plugins {
     kotlin("kapt")
     id("dagger.hilt.android.plugin")
     id("androidx.navigation.safeargs.kotlin")
+    id("org.jlleitschuh.gradle.ktlint") version "10.2.0"
 }
 
 android {
-    compileSdk =  31
+    compileSdk = 31
 
     defaultConfig {
         applicationId = "com.ticketswap.android.assessment"
 
         minSdk = 24
-        targetSdk =  31
+        targetSdk = 31
         versionCode = 1
         versionName = "1.0"
 
@@ -49,6 +50,14 @@ android {
     // Allow references to generated code
     kapt {
         correctErrorTypes = true
+    }
+}
+
+// https://github.com/JLLeitschuh/ktlint-gradle#configuration
+ktlint {
+    reporters {
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.HTML)
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
     }
 }
 
