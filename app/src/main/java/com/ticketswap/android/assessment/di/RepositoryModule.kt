@@ -1,13 +1,10 @@
 package com.ticketswap.android.assessment.di
 
-import com.ticketswap.android.assessment.data.repository.BookAppointment
-import com.ticketswap.android.assessment.data.repository.BookAppointmentImpl
+import com.ticketswap.android.assessment.data.repository.Repository
+import com.ticketswap.android.assessment.data.repository.RepositoryImpl
 import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
-import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.components.SingletonComponent
 
 @InstallIn(SingletonComponent::class)
@@ -15,5 +12,5 @@ import dagger.hilt.components.SingletonComponent
 abstract class RepositoryModule {
 
     @Binds
-    abstract fun bindBookAppointment(bookAppointmentImpl: BookAppointmentImpl): BookAppointment
+    abstract fun bindRepository(repositoryImpl: RepositoryImpl): Repository
 }

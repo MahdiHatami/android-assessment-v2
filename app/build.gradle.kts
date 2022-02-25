@@ -51,6 +51,14 @@ android {
     kapt {
         correctErrorTypes = true
     }
+
+    tasks.withType().all {
+        kotlinOptions {
+            jvmTarget = JavaVersion.VERSION_11.toString()
+            // allWarningsAsErrors = true
+            freeCompilerArgs = listOf("-Xopt-in=kotlin.RequiresOptIn")
+        }
+    }
 }
 
 // https://github.com/JLLeitschuh/ktlint-gradle#configuration

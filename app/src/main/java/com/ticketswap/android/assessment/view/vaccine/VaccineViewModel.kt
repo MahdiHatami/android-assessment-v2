@@ -2,7 +2,7 @@ package com.ticketswap.android.assessment.view.vaccine
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ticketswap.android.assessment.data.repository.BookAppointment
+import com.ticketswap.android.assessment.data.repository.Repository
 import com.ticketswap.android.assessment.domain.model.QueryResult
 import com.ticketswap.android.assessment.view.mapper.toViewVaccineDetailItem
 import com.ticketswap.android.assessment.view.util.LoadingState
@@ -18,7 +18,7 @@ import javax.inject.Inject
  * 2- Avoiding background work
  */
 class VaccineViewModel @Inject constructor(
-    private val repository: BookAppointment
+    private val repository: Repository
 ) : ViewModel() {
 
     private val _loadingState: MutableStateFlow<LoadingState> = MutableStateFlow(LoadingState.None)
