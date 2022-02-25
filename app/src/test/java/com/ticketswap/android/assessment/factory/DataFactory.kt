@@ -1,6 +1,5 @@
-package com.metis.rickmorty.factory
+package com.ticketswap.android.assessment.factory
 
-import java.util.ArrayList
 import java.util.UUID
 import java.util.concurrent.ThreadLocalRandom
 
@@ -8,28 +7,11 @@ object DataFactory {
 
     fun randomString(): String = UUID.randomUUID().toString()
 
-    fun randomStringList(count: Int): List<String> {
-        val list: MutableList<String> = ArrayList()
-
-        repeat(count) {
-            list.add(randomString())
-        }
-
-        return list
-    }
-
     fun randomInt(min: Int = Int.MIN_VALUE, max: Int = Int.MAX_VALUE): Int =
         ThreadLocalRandom.current().nextInt(min, max)
 
-    fun randomIntList(count: Int, min: Int = Int.MIN_VALUE, max: Int = Int.MAX_VALUE): List<Int> {
-        val list: MutableList<Int> = ArrayList()
-
-        repeat(count) {
-            list.add(randomInt(min, max))
-        }
-
-        return list
-    }
+    fun randomLong(min: Long = Long.MIN_VALUE, max: Long = Long.MAX_VALUE): Long =
+        ThreadLocalRandom.current().nextLong(min, max)
 
     fun randomBoolean(): Boolean = Math.random() < 0.5
 }
