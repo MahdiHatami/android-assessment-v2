@@ -1,6 +1,6 @@
 package com.ticketswap.android.assessment.di
 
-import com.ticketswap.android.assessment.data.local.VaccineDatabase
+import com.ticketswap.android.assessment.data.local.db.VaccineDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -9,7 +9,7 @@ import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
 @Module
-class DatabseModule {
+class DatabaseModule {
 
     @Singleton
     @Provides

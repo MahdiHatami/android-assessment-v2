@@ -1,9 +1,8 @@
-package com.ticketswap.android.assessment
+package com.ticketswap.android.assessment.data.repository
 
-import com.ticketswap.android.assessment.data.local.VaccineDatabase
+import com.ticketswap.android.assessment.data.local.LocalDataSource
 import com.ticketswap.android.assessment.data.model.Vaccine
-import com.ticketswap.android.assessment.data.repository.Repository
-import com.ticketswap.android.assessment.data.repository.RepositoryImpl
+import com.ticketswap.android.assessment.factory.VaccineDataFactory
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -16,7 +15,7 @@ import org.junit.Test
 @OptIn(ExperimentalCoroutinesApi::class)
 class RepositoryTest {
     @MockK
-    lateinit var database: VaccineDatabase
+    lateinit var localDataSource: LocalDataSource
 
     @MockK
     lateinit var repository: Repository
@@ -25,25 +24,25 @@ class RepositoryTest {
     fun setUp() {
         MockKAnnotations.init(this)
 
-        repository = RepositoryImpl(database)
+        repository = RepositoryImpl(localDataSource)
     }
 
     @Test
     fun `getVaccineById hit db once`() = runBlockingTest {
         // GIVEN
-        val vaccine = database.getVaccine(1)
+        val vaccine = VaccineDataFactory.makeVaccine(1)
         stubQueryVaccineDatabaseGetById(vaccine)
 
         // WHEN
         repository.getVaccineById(id = 1)
 
         // THEN
-        coVerify(exactly = 1) { database.getVaccine(any()) }
+        coVerify(exactly = 1) { localDataSource.getVaccine(any()) }
     }
 
     private fun stubQueryVaccineDatabaseGetById(vaccine: Vaccine) {
         coEvery {
-            database.getVaccine(vaccineId = any())
+            localDataSource.getVaccine(vaccineId = any())
         } returns vaccine
     }
 }

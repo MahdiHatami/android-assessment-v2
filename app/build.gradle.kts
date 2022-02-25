@@ -52,6 +52,13 @@ android {
         correctErrorTypes = true
     }
 
+    testOptions {
+        unitTests.apply {
+            isReturnDefaultValues = true
+            isIncludeAndroidResources = true
+        }
+    }
+
     tasks.withType().all {
         kotlinOptions {
             jvmTarget = JavaVersion.VERSION_11.toString()

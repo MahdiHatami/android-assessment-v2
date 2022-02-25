@@ -1,4 +1,4 @@
-package com.ticketswap.android.assessment.data.local
+package com.ticketswap.android.assessment.data.local.db
 
 import com.ticketswap.android.assessment.data.model.Vaccine
 import kotlinx.coroutines.Dispatchers
