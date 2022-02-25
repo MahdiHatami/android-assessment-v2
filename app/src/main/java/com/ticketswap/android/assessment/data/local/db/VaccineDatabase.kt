@@ -4,6 +4,7 @@ import com.ticketswap.android.assessment.data.model.Vaccine
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
+import kotlin.random.Random
 
 private val list = listOf(
     Vaccine(
@@ -84,5 +85,9 @@ class VaccineDatabase {
             it.id == vaccineId
         }
         vaccine
+    }
+
+    suspend fun bookAppointment() = withContext(Dispatchers.IO) {
+        Random.nextBoolean().also { delay(Random.nextLong() % 30L) }
     }
 }

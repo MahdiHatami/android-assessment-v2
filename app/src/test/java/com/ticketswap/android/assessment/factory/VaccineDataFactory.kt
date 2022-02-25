@@ -20,4 +20,6 @@ object VaccineDataFactory {
         }
         return vaccinesList
     }
+
+    internal fun makeAppointment(): Boolean = DataFactory.randomBoolean()
 }

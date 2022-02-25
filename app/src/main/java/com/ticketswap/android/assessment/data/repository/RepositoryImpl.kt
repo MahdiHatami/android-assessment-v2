@@ -18,7 +18,7 @@ class RepositoryImpl @Inject constructor(
 ) : Repository {
     override suspend fun bookAppointment(): QueryResult.Successful<Boolean> =
         withContext(Dispatchers.IO) {
-            val random = Random.nextBoolean().also { delay(Random.nextLong() % 30L) }
+            val random = localDataSource.bookAppointment()
             QueryResult.Successful(random)
         }
 
