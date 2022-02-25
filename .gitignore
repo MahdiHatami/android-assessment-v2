@@ -109,3 +109,4 @@ buildSrc/.gradle
 
 # End of https://www.toptal.com/developers/gitignore/api/android
 /.idea/misc.xml
+/app/jacoco.exec
