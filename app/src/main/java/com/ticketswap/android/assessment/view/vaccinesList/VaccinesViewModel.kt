@@ -1,12 +1,11 @@
 package com.ticketswap.android.assessment.view.vaccinesList
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ticketswap.android.assessment.data.local.VaccineDatabase
 import com.ticketswap.android.assessment.data.model.Vaccine
+import com.ticketswap.android.assessment.data.repository.Repository
 import com.ticketswap.android.assessment.domain.model.PageQueryResult
 import com.ticketswap.android.assessment.view.mapper.toViewVaccineItem
 import com.ticketswap.android.assessment.view.util.LoadingState
@@ -22,7 +21,7 @@ import javax.inject.Inject
  * Using DI could help cleaner and reusable codes
  */
 class VaccinesViewModel @Inject constructor(
-    private val database: VaccineDatabase
+    private val repository: Repository
 ) : ViewModel() {
 
     private val _loadingState: MutableStateFlow<LoadingState> = MutableStateFlow(LoadingState.None)
@@ -44,7 +43,7 @@ class VaccinesViewModel @Inject constructor(
     private fun loadVaccines() {
         _loadingState.value = LoadingState.Loading
         viewModelScope.launch {
-            when (val result = database.getVaccines()) {
+            when (val result = repository.getVaccines()) {
                 is PageQueryResult.Successful -> {
                     _vaccinesList.value = result.data.toViewVaccineItems()
                 }

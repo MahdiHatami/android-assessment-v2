@@ -1,8 +1,6 @@
 package com.ticketswap.android.assessment.data.local
 
 import com.ticketswap.android.assessment.data.model.Vaccine
-import com.ticketswap.android.assessment.domain.model.PageQueryResult
-import com.ticketswap.android.assessment.domain.model.QueryResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
@@ -76,15 +74,15 @@ private val list = listOf(
 
 class VaccineDatabase {
 
-    suspend fun getVaccines(): PageQueryResult<List<Vaccine>> = withContext(Dispatchers.IO) {
+    suspend fun getVaccines(): List<Vaccine> = withContext(Dispatchers.IO) {
         delay(1000L)
-        PageQueryResult.Successful(list)
+        list
     }
 
-    fun getVaccine(vaccineId: Long): QueryResult<Vaccine> {
+    suspend fun getVaccine(vaccineId: Long): Vaccine = withContext(Dispatchers.IO) {
         val vaccine = list.first {
             it.id == vaccineId
         }
-        return QueryResult.Successful(vaccine)
+        vaccine
     }
 }
