@@ -116,6 +116,7 @@ dependencies {
 
     // Test
     testImplementation("junit:junit:4.13.2")
-    testImplementation("org.robolectric:robolectric:4.7.2")
-    testImplementation("io.mockk:mockk:1.12.1")
+    testImplementation("org.robolectric:robolectric:4.7.3")
+    testImplementation("io.mockk:mockk:1.12.2")
+    testImplementation("com.google.truth:truth:1.1")
 }

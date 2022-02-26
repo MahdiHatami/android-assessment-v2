@@ -8,6 +8,7 @@ import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
 import org.junit.Test
@@ -17,7 +18,6 @@ class RepositoryTest {
     @MockK
     lateinit var localDataSource: LocalDataSource
 
-    @MockK
     lateinit var repository: Repository
 
     @Before
@@ -28,16 +28,51 @@ class RepositoryTest {
     }
 
     @Test
-    fun `getVaccineById hit db once`() = runBlockingTest {
+    fun `getVaccineById hit db once`() = runBlocking{
         // GIVEN
-        val vaccine = VaccineDataFactory.makeVaccine(1)
-        stubQueryVaccineDatabaseGetById(vaccine)
+        stubQueryVaccineDatabaseGetById(VaccineDataFactory.makeVaccine(1))
 
         // WHEN
         repository.getVaccineById(id = 1)
 
         // THEN
         coVerify(exactly = 1) { localDataSource.getVaccine(any()) }
+    }
+
+    @Test
+    fun `getVaccines should return list of vaccines`() = runBlocking {
+        // GIVEN
+        stubQueryVaccinesList(VaccineDataFactory.makeVaccinesList(5))
+
+        // WHEN
+        repository.getVaccines()
+
+        // THEN
+        coVerify { localDataSource.getVaccines() }
+    }
+
+    @Test
+    fun `when booking appointment should return random boolean`() = runBlocking {
+        // GIVEN
+        stubMakeAppointment(VaccineDataFactory.makeAppointment())
+
+        // WHEN
+        repository.bookAppointment()
+
+        // THEN
+        coVerify { localDataSource.bookAppointment() }
+    }
+
+    private fun stubMakeAppointment(appointment: Boolean) {
+        coEvery {
+            localDataSource.bookAppointment()
+        } returns appointment
+    }
+
+    private fun stubQueryVaccinesList(vaccines: List<Vaccine>) {
+        coEvery {
+            localDataSource.getVaccines()
+        } returns vaccines
     }
 
     private fun stubQueryVaccineDatabaseGetById(vaccine: Vaccine) {
