@@ -1,7 +1,5 @@
 package com.ticketswap.android.assessment.view.vaccinesList
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ticketswap.android.assessment.data.model.Vaccine
@@ -30,8 +28,8 @@ class VaccinesViewModel @Inject constructor(
     private val _onError: MutableStateFlow<Boolean> = MutableStateFlow(false)
     val onError: StateFlow<Boolean> = _onError
 
-    private val _vaccinesList = MutableLiveData<List<ViewVaccineItem>>()
-    val vaccinesList: LiveData<List<ViewVaccineItem>> = _vaccinesList
+    private val _vaccinesList = MutableStateFlow<List<ViewVaccineItem>>(emptyList())
+    val vaccinesList: StateFlow<List<ViewVaccineItem>> = _vaccinesList
 
     private val _selectedVaccine: Channel<Long> = Channel()
     val selectedVaccine: Flow<Long> = _selectedVaccine.receiveAsFlow()
@@ -40,7 +38,7 @@ class VaccinesViewModel @Inject constructor(
         loadVaccines()
     }
 
-    private fun loadVaccines() {
+    fun loadVaccines() {
         _loadingState.value = LoadingState.Loading
         viewModelScope.launch {
             when (val result = repository.getVaccines()) {
